@@ -42,6 +42,10 @@ body.nav-open {
   overflow: hidden;
 }
 
+body.gallery-open {
+  overflow: hidden;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -108,18 +112,15 @@ img {
   min-width: 0;
 }
 
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
+.brand-logo {
+  width: 54px;
+  height: 54px;
   flex: 0 0 auto;
-  color: #fff;
-  background:
-    linear-gradient(135deg, var(--red), var(--red-dark) 48%, var(--green) 49%, var(--green-dark));
+  object-fit: cover;
+  background: #050505;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
-  font-weight: 900;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
 }
 
 .brand-copy {
@@ -227,6 +228,16 @@ img {
   width: min(100% - 40px, var(--max-width));
   margin: 0 auto;
   padding: 120px 0 72px;
+}
+
+.hero-logo {
+  width: min(310px, 72vw);
+  height: auto;
+  margin: 0 0 22px;
+  background: #050505;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
 }
 
 .eyebrow {
@@ -446,6 +457,14 @@ h3 {
   aspect-ratio: 4 / 3;
   object-fit: cover;
   background: #111827;
+  cursor: pointer;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.car-media > img:hover {
+  opacity: 0.92;
 }
 
 .image-strip {
@@ -464,6 +483,18 @@ h3 {
   overflow: hidden;
   border: 1px solid rgba(248, 250, 252, 0.16);
   border-radius: 6px;
+  opacity: 0.74;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    opacity 160ms ease;
+}
+
+.image-strip a:hover,
+.image-strip a.is-active {
+  border-color: rgba(224, 49, 49, 0.9);
+  box-shadow: 0 0 0 2px rgba(224, 49, 49, 0.28);
+  opacity: 1;
 }
 
 .image-strip img {
@@ -759,6 +790,126 @@ h3 {
   display: none;
 }
 
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  align-items: center;
+  padding: 26px;
+  background: rgba(3, 7, 12, 0.92);
+  backdrop-filter: blur(16px);
+}
+
+.gallery-lightbox[hidden] {
+  display: none;
+}
+
+.gallery-close {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: var(--text);
+  background: rgba(248, 250, 252, 0.12);
+  border: 1px solid rgba(248, 250, 252, 0.28);
+  border-radius: 8px;
+  font-size: 1.15rem;
+  font-weight: 950;
+}
+
+.gallery-shell {
+  display: grid;
+  gap: 18px;
+  width: min(100%, 1120px);
+  margin: 0 auto;
+}
+
+.gallery-lines {
+  display: flex;
+  gap: 9px;
+  width: min(100%, 560px);
+  margin: 0 auto;
+}
+
+.gallery-line {
+  flex: 1;
+  height: 5px;
+  padding: 0;
+  background: rgba(248, 250, 252, 0.26);
+  border: 0;
+  border-radius: 999px;
+}
+
+.gallery-line.is-active {
+  background: var(--red);
+  box-shadow: 0 0 18px rgba(224, 49, 49, 0.45);
+}
+
+.gallery-stage {
+  position: relative;
+  display: grid;
+  align-items: center;
+}
+
+.gallery-stage figure {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+
+.gallery-stage img {
+  width: min(100%, 1040px);
+  max-height: 78vh;
+  margin: 0 auto;
+  object-fit: contain;
+  background: #05080d;
+  border: 1px solid rgba(248, 250, 252, 0.16);
+  border-radius: 8px;
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.52);
+}
+
+.gallery-stage figcaption {
+  color: #eaf0f7;
+  font-weight: 850;
+  text-align: center;
+}
+
+.gallery-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  color: var(--text);
+  background: rgba(248, 250, 252, 0.13);
+  border: 1px solid rgba(248, 250, 252, 0.28);
+  border-radius: 8px;
+  font-size: 1.4rem;
+  font-weight: 950;
+  transform: translateY(-50%);
+}
+
+.gallery-prev {
+  left: 14px;
+}
+
+.gallery-next {
+  right: 14px;
+}
+
+.gallery-close:hover,
+.gallery-nav:hover {
+  background: rgba(224, 49, 49, 0.82);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
 @media (max-width: 1080px) {
   h1 {
     font-size: 4.4rem;
@@ -807,9 +958,9 @@ h3 {
     min-height: 68px;
   }
 
-  .brand-mark {
-    width: 44px;
-    height: 44px;
+  .brand-logo {
+    width: 46px;
+    height: 46px;
   }
 
   .brand-copy small {
@@ -971,6 +1122,49 @@ h3 {
     background: rgba(248, 250, 252, 0.1);
     border-color: rgba(248, 250, 252, 0.12);
     font-size: 0.88rem;
+  }
+
+  .gallery-lightbox {
+    align-items: start;
+    padding: 78px 12px calc(82px + env(safe-area-inset-bottom));
+  }
+
+  .gallery-close {
+    top: 12px;
+    right: 12px;
+    width: 46px;
+    height: 46px;
+  }
+
+  .gallery-shell {
+    gap: 14px;
+  }
+
+  .gallery-lines {
+    gap: 7px;
+  }
+
+  .gallery-line {
+    height: 4px;
+  }
+
+  .gallery-stage img {
+    width: 100%;
+    max-height: 62vh;
+  }
+
+  .gallery-nav {
+    width: 44px;
+    height: 44px;
+    background: rgba(10, 16, 23, 0.74);
+  }
+
+  .gallery-prev {
+    left: 8px;
+  }
+
+  .gallery-next {
+    right: 8px;
   }
 }
 

@@ -15,7 +15,8 @@
       content="Inchirieri auto in Ungheni cu Opel Meriva, Volkswagen Jetta, Ford Focus si Skoda Rapid."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="imagini-auto-png/Volkswagen jetta 1.png" />
+    <meta property="og:image" content="assets/logo-chirie-auto-anb.png" />
+    <link rel="preload" as="image" href="assets/logo-chirie-auto-anb.png" />
     <link rel="preload" as="image" href="imagini-auto-png/Volkswagen jetta 1.png" />
     <link rel="stylesheet" href="styles.css" />
     <script defer src="script.js"></script>
@@ -41,7 +42,7 @@
   <body>
     <header class="site-header" aria-label="Antet pagina">
       <a class="brand" href="#top" aria-label="Chirie Auto A.N.B">
-        <span class="brand-mark" aria-hidden="true">ANB</span>
+        <img class="brand-logo" src="assets/logo-chirie-auto-anb.png" alt="" aria-hidden="true" />
         <span class="brand-copy">
           <strong>Chirie Auto A.N.B</strong>
           <small>Ungheni, Republica Moldova</small>
@@ -70,6 +71,7 @@
           <img src="imagini-auto-png/Volkswagen jetta 1.png" alt="" />
         </div>
         <div class="hero-content">
+          <img class="hero-logo" src="assets/logo-chirie-auto-anb.png" alt="Chirie Auto A.N.B" />
           <p class="eyebrow">Inchirieri auto in Ungheni</p>
           <h1 id="hero-title">Chirie Auto A.N.B</h1>
           <p class="hero-copy">
@@ -134,13 +136,13 @@
             <div class="car-media">
               <img src="imagini-auto-png/Opel Meriva.png" alt="Opel Meriva din fata" />
               <div class="image-strip" aria-label="Galerie Opel Meriva">
-                <a href="imagini-auto-png/Opel Meriva.png" target="_blank" rel="noreferrer">
+                <a href="imagini-auto-png/Opel Meriva.png">
                   <img src="imagini-auto-png/Opel Meriva.png" alt="Opel Meriva poza 1" loading="lazy" />
                 </a>
-                <a href="imagini-auto-png/Opel Mariva 2.png" target="_blank" rel="noreferrer">
+                <a href="imagini-auto-png/Opel Mariva 2.png">
                   <img src="imagini-auto-png/Opel Mariva 2.png" alt="Opel Meriva poza 2" loading="lazy" />
                 </a>
-                <a href="imagini-auto-png/Opel Mariva 3.png" target="_blank" rel="noreferrer">
+                <a href="imagini-auto-png/Opel Mariva 3.png">
                   <img src="imagini-auto-png/Opel Mariva 3.png" alt="Opel Meriva poza 3" loading="lazy" />
                 </a>
               </div>
@@ -167,14 +169,14 @@
             <div class="car-media">
               <img src="imagini-auto-png/Volkswagen jetta 1.png" alt="Volkswagen Jetta din fata" />
               <div class="image-strip" aria-label="Galerie Volkswagen Jetta">
-                <a href="imagini-auto-png/Volkswagen jetta 1.png" target="_blank" rel="noreferrer">
+                <a href="imagini-auto-png/Volkswagen jetta 1.png">
                   <img
                     src="imagini-auto-png/Volkswagen jetta 1.png"
                     alt="Volkswagen Jetta poza 1"
                     loading="lazy"
                   />
                 </a>
-                <a href="imagini-auto-png/Volkswagen jetta 2.png" target="_blank" rel="noreferrer">
+                <a href="imagini-auto-png/Volkswagen jetta 2.png">
                   <img
                     src="imagini-auto-png/Volkswagen jetta 2.png"
                     alt="Volkswagen Jetta poza 2"
@@ -205,13 +207,13 @@
             <div class="car-media">
               <img src="imagini-auto-png/ford focus 1.png" alt="Ford Focus din fata" />
               <div class="image-strip" aria-label="Galerie Ford Focus">
-                <a href="imagini-auto-png/ford focus 1.png" target="_blank" rel="noreferrer">
+                <a href="imagini-auto-png/ford focus 1.png">
                   <img src="imagini-auto-png/ford focus 1.png" alt="Ford Focus poza 1" loading="lazy" />
                 </a>
-                <a href="imagini-auto-png/ford focus 2.png" target="_blank" rel="noreferrer">
+                <a href="imagini-auto-png/ford focus 2.png">
                   <img src="imagini-auto-png/ford focus 2.png" alt="Ford Focus poza 2" loading="lazy" />
                 </a>
-                <a href="imagini-auto-png/Ford focus 3.png" target="_blank" rel="noreferrer">
+                <a href="imagini-auto-png/Ford focus 3.png">
                   <img src="imagini-auto-png/Ford focus 3.png" alt="Ford Focus poza 3" loading="lazy" />
                 </a>
               </div>
@@ -238,10 +240,10 @@
             <div class="car-media">
               <img src="imagini-auto-png/Skoda Rapid 1.png" alt="Skoda Rapid din fata" />
               <div class="image-strip" aria-label="Galerie Skoda Rapid">
-                <a href="imagini-auto-png/Skoda Rapid 1.png" target="_blank" rel="noreferrer">
+                <a href="imagini-auto-png/Skoda Rapid 1.png">
                   <img src="imagini-auto-png/Skoda Rapid 1.png" alt="Skoda Rapid poza 1" loading="lazy" />
                 </a>
-                <a href="imagini-auto-png/Skoda rapid 2.png" target="_blank" rel="noreferrer">
+                <a href="imagini-auto-png/Skoda rapid 2.png">
                   <img src="imagini-auto-png/Skoda rapid 2.png" alt="Skoda Rapid poza 2" loading="lazy" />
                 </a>
               </div>
@@ -493,6 +495,25 @@
       </nav>
       <small>&copy; <span id="current-year">2026</span> Chirie Auto A.N.B. Site pregatit pentru GitHub Pages.</small>
     </footer>
+
+    <div class="gallery-lightbox" id="gallery-lightbox" role="dialog" aria-modal="true" aria-labelledby="gallery-title" hidden>
+      <button class="gallery-close" type="button" id="gallery-close" aria-label="Inchide galeria">X</button>
+      <div class="gallery-shell">
+        <div class="gallery-lines" id="gallery-lines" aria-label="Navigare poze"></div>
+        <div class="gallery-stage">
+          <button class="gallery-nav gallery-prev" type="button" id="gallery-prev" aria-label="Poza anterioara">
+            &lt;
+          </button>
+          <figure>
+            <img id="gallery-image" src="" alt="" />
+            <figcaption id="gallery-title"></figcaption>
+          </figure>
+          <button class="gallery-nav gallery-next" type="button" id="gallery-next" aria-label="Poza urmatoare">
+            &gt;
+          </button>
+        </div>
+      </div>
+    </div>
 
     <div class="cookie-banner" id="cookie-banner" hidden>
       <p>
