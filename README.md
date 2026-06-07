@@ -26,6 +26,8 @@ Fluxul este:
 - Serverul creeaza plata la `POST /api/Payments/Send`.
 - Clientul este redirectionat la Paynet prin formularul Server-Server.
 
+Metode afisate pe pagina prin Paynet: Visa, Mastercard, MIA, Paynet Wallet, Google Pay si Apple Pay.
+
 Nu pune `.env`, tokenuri, parole API sau chei merchant in git.
 
 ## Firebase
