@@ -579,14 +579,16 @@ h3 {
 }
 
 .info-grid,
-.criteria-grid {
+.criteria-grid,
+.paynet-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
 .info-item,
-.criteria-item {
+.criteria-item,
+.paynet-item {
   min-width: 0;
   padding: 22px;
   background: rgba(248, 250, 252, 0.06);
@@ -594,7 +596,8 @@ h3 {
   border-radius: 8px;
 }
 
-.info-item span {
+.info-item span,
+.paynet-item span {
   display: inline-flex;
   margin-bottom: 20px;
   color: var(--amber);
@@ -603,7 +606,8 @@ h3 {
 }
 
 .info-item p,
-.criteria-item p {
+.criteria-item p,
+.paynet-item p {
   margin-bottom: 0;
 }
 
@@ -663,6 +667,46 @@ h3 {
 
 .booking-form .wide {
   grid-column: 1 / -1;
+}
+
+.payment-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.payment-actions .button {
+  width: 100%;
+}
+
+.payment-actions .button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
+}
+
+.form-status {
+  min-height: 22px;
+  margin: 0;
+  color: #344054;
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.form-status[data-type="pending"] {
+  color: #175cd3;
+}
+
+.form-status[data-type="success"] {
+  color: var(--green-dark);
+}
+
+.form-status[data-type="error"] {
+  color: var(--red-dark);
+}
+
+.paynet-section {
+  padding-top: 24px;
 }
 
 .consent {
@@ -910,6 +954,21 @@ h3 {
   border-color: rgba(255, 255, 255, 0.35);
 }
 
+.paynet-status-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 32px;
+}
+
+.paynet-status-page section {
+  width: min(100%, 720px);
+}
+
+.paynet-status-page h1 {
+  font-size: clamp(2.4rem, 8vw, 4.8rem);
+}
+
 @media (max-width: 1080px) {
   h1 {
     font-size: 4.4rem;
@@ -935,7 +994,8 @@ h3 {
   }
 
   .info-grid,
-  .criteria-grid {
+  .criteria-grid,
+  .paynet-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1064,7 +1124,9 @@ h3 {
   .fleet-grid,
   .info-grid,
   .criteria-grid,
-  .booking-form {
+  .paynet-grid,
+  .booking-form,
+  .payment-actions {
     grid-template-columns: 1fr;
   }
 

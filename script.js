@@ -3,6 +3,7 @@
   const navToggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector("#primary-nav");
   const bookingForm = document.querySelector("#booking-form");
+  const bookingStatus = document.querySelector("#booking-status");
   const carSelect = document.querySelector("#car-select");
   const rentalDate = document.querySelector("#rental-date");
   const cookieBanner = document.querySelector("#cookie-banner");
@@ -268,14 +269,22 @@
   });
 
   if (bookingForm) {
-    bookingForm.addEventListener("submit", function (event) {
+    bookingForm.addEventListener("submit", async function (event) {
       event.preventDefault();
 
       if (!bookingForm.reportValidity()) {
         return;
       }
 
+      const submitter = event.submitter;
       const formData = new FormData(bookingForm);
+      const action = submitter?.dataset.submitAction || "whatsapp";
+
+      if (action === "paynet") {
+        await startPaynetCheckout(formData, submitter);
+        return;
+      }
+
       const message = [
         "Salut, vreau sa rezerv o masina de la Chirie Auto A.N.B.",
         "",
@@ -289,6 +298,71 @@
 
       window.open("https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(message), "_blank", "noopener");
     });
+  }
+
+  async function startPaynetCheckout(formData, submitter) {
+    setBookingStatus("Pregatim plata Paynet...", "pending");
+    toggleFormButtons(true);
+
+    try {
+      const response = await fetch("/api/paynet/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(Object.fromEntries(formData.entries()))
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Paynet nu a acceptat cererea.");
+      }
+
+      setBookingStatus("Redirectionam catre Paynet...", "success");
+      submitPaynetForm(data.gatewayUrl, data.fields);
+    } catch (error) {
+      setBookingStatus(
+        (error && error.message ? error.message : "Plata Paynet nu este disponibila.") +
+          " Poti trimite cererea pe WhatsApp.",
+        "error"
+      );
+      submitter?.focus();
+    } finally {
+      toggleFormButtons(false);
+    }
+  }
+
+  function submitPaynetForm(action, fields) {
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = action;
+    form.hidden = true;
+
+    Object.entries(fields || {}).forEach(function ([name, value]) {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+  function toggleFormButtons(isDisabled) {
+    bookingForm?.querySelectorAll("button[type='submit']").forEach(function (button) {
+      button.disabled = isDisabled;
+    });
+  }
+
+  function setBookingStatus(message, type) {
+    if (!bookingStatus) {
+      return;
+    }
+
+    bookingStatus.textContent = message;
+    bookingStatus.dataset.type = type || "";
   }
 
   if (cookieBanner && acceptCookies) {
